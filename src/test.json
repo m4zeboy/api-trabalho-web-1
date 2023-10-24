@@ -1,0 +1,65 @@
+[
+  {
+    "field": "request_number",
+    "label": "Número da Solicitação",
+    "value": "92",
+    "displayValue": "92",
+    "disabledFormFields": true,
+    "error": false,
+    "model": "92"
+  },
+  {
+    "field": "service_type",
+    "label": "Tipo Serviço",
+    "value": "5d78b2f147e6a110bfcbff6f746d43cf",
+    "displayValue": "Veículo",
+    "disabledFormFields": true,
+    "error": false,
+    "model": "Veículo"
+  },
+  {
+    "field": "ticket_number",
+    "label": "Ticket",
+    "value": null,
+    "displayValue": "-",
+    "disabledFormFields": true,
+    "error": false,
+    "model": "-"
+  },
+  {
+    "field": "ticket_value",
+    "label": "Tarifa",
+    "value": "96.42",
+    "displayValue": 96.42,
+    "disabledFormFields": false,
+    "error": false,
+    "model": 96.42
+  },
+  {
+    "field": "tax_value",
+    "label": "Taxa",
+    "value": "0",
+    "displayValue": 0,
+    "disabledFormFields": false,
+    "error": false,
+    "model": 0
+  },
+  {
+    "field": "fee_value",
+    "label": "Fee",
+    "value": "0",
+    "displayValue": 0,
+    "disabledFormFields": false,
+    "error": false,
+    "model": 0
+  },
+  {
+    "field": "total_value",
+    "label": "Total",
+    "value": "96.42",
+    "displayValue": 96.42,
+    "disabledFormFields": true,
+    "error": false,
+    "model": 96.42
+  }
+]

@@ -57,6 +57,8 @@ router.POST('/recipes', async (req, res) => {
     cookingMethod,
   }
 
+  console.log(recipe)
+
   database.insert('recipes', recipe)
   return res.writeHead(201).end()
 })
