@@ -1,0 +1,45 @@
+{
+  "recipes": [
+    {
+      "id": "5d4f88b1-b0e8-435e-90e7-614763ca7714",
+      "author": "João da Silva",
+      "recipeName": "Lasanha de Frango",
+      "description": "Uma deliciosa lasanha de frango caseira.",
+      "images": [
+        "imagem1.jpg",
+        "imagem2.jpg"
+      ],
+      "categories": [
+        "Massas",
+        "Frango"
+      ],
+      "ingredients": [
+        {
+          "ingredientName": "Peito de frango",
+          "quantity": 2,
+          "unit": "peitos"
+        },
+        {
+          "ingredientName": "Massa para lasanha",
+          "quantity": 9,
+          "unit": "folhas"
+        },
+        {
+          "ingredientName": "Molho de tomate",
+          "quantity": 2,
+          "unit": "xícaras"
+        },
+        {
+          "ingredientName": "Queijo mussarela ralado",
+          "quantity": 1,
+          "unit": "xícara"
+        }
+      ],
+      "prepareTime": 60,
+      "instructions": "1. Cozinhe o peito de frango e desfie.\n2. Monte as camadas de lasanha intercalando massa, molho, frango e queijo.\n3. Leve ao forno pré-aquecido a 180°C por 30 minutos.",
+      "portions": 4,
+      "nutritionalValue": 400,
+      "cookingMethod": "Forno"
+    }
+  ]
+}
