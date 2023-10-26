@@ -47,7 +47,7 @@ registerForm.addEventListener('submit', async (event) => {
   } catch (err) {
     if (err instanceof Error) {
       const invalidFeedback = document.querySelector('.invalid-feedback')
-      invalidFeedback.innerHTML = 'data.message'
+      invalidFeedback.innerHTML = data.message
     }
   }
 })
