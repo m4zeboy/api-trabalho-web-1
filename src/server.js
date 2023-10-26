@@ -34,6 +34,10 @@ app.get('/public', function (req, reply) {
   return reply.sendFile('index.html')
 })
 
+app.get('/public/login', function (req, reply) {
+  return reply.sendFile('login/index.html')
+})
+
 try {
   await app.listen({ port: 3333 })
   console.log('🤟 server is running')
