@@ -11,10 +11,13 @@ export function makeCreateUserBodySchema() {
     city: z.string().refine((value) => /^[a-zA-z ]+$/.test(value), {
       message: 'Must contain only letters and spaces',
     }),
-    phoneNumber: z.string().refine((value) => /^\d{10}$/.test(value), {
-      message: 'Invalid phone number format',
-    }),
+    phoneNumber: z
+      .string()
+      .refine((value) => /^\(\d{2}\) \d{4}-\d{4}$/.test(value), {
+        message: 'Invalid phone number format',
+      }),
     email: z.string().email(),
+    state: z.string().max(2),
     password: z
       .string()
       .min(8)

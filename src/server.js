@@ -23,7 +23,6 @@ app.register(appRoutes)
 const staticPath = path
   .join(import.meta.url, '../../public/')
   .replace('file:', '')
-console.log(staticPath)
 
 app.register(fastifyStatic, {
   root: staticPath,
@@ -35,7 +34,7 @@ app.get('/public', function (req, reply) {
 })
 
 app.get('/public/login', function (req, reply) {
-  return reply.sendFile('login/index.html')
+  return reply.sendFile('register/index.html')
 })
 
 try {
