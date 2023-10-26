@@ -1,6 +1,6 @@
-import { CreateUserUseCase } from '../use-cases/create-users.js'
-import { UserAlreadyExists } from '../use-cases/errors/user-already-exists.js'
 import { makeCreateUserBodySchema } from './schemas/create-user-body-schema.js'
+import { CreateUserUseCase } from '../../use-cases/create-users.js'
+import { UserAlreadyExists } from '../../use-cases/errors/user-already-exists.js'
 
 export async function createUsers(request, reply) {
   const createUserBodySchema = makeCreateUserBodySchema()

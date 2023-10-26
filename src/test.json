@@ -1,65 +1,75 @@
 [
   {
+    "displayValue": "59",
     "field": "request_number",
+    "match": true,
+    "model": "59",
+    "currency": false,
     "label": "Número da Solicitação",
-    "value": "92",
-    "displayValue": "92",
     "disabledFormFields": true,
     "error": false,
-    "model": "92"
+    "value": "59"
   },
   {
-    "field": "service_type",
-    "label": "Tipo Serviço",
-    "value": "5d78b2f147e6a110bfcbff6f746d43cf",
     "displayValue": "Veículo",
+    "field": "service_type",
+    "match": true,
+    "model": "Veículo",
+    "currency": false,
+    "label": "Tipo Serviço",
     "disabledFormFields": true,
     "error": false,
-    "model": "Veículo"
+    "value": "5d78b2f147e6a110bfcbff6f746d43cf"
   },
   {
-    "field": "ticket_number",
-    "label": "Ticket",
-    "value": null,
     "displayValue": "-",
+    "field": "ticket_number",
+    "match": true,
+    "model": "-",
+    "currency": false,
+    "label": "Ticket",
     "disabledFormFields": true,
     "error": false,
-    "model": "-"
+    "value": null
   },
   {
+    "displayValue": 5,
     "field": "ticket_value",
+    "match": true,
+    "currency": true,
     "label": "Tarifa",
-    "value": "96.42",
-    "displayValue": 96.42,
     "disabledFormFields": false,
     "error": false,
-    "model": 96.42
+    "value": "5"
   },
   {
+    "displayValue": 0,
     "field": "tax_value",
+    "match": false,
+    "currency": true,
     "label": "Taxa",
-    "value": "0",
-    "displayValue": 0,
     "disabledFormFields": false,
     "error": false,
-    "model": 0
+    "value": "0"
   },
   {
+    "displayValue": 0,
     "field": "fee_value",
+    "match": false,
+    "currency": true,
     "label": "Fee",
-    "value": "0",
-    "displayValue": 0,
     "disabledFormFields": false,
     "error": false,
-    "model": 0
+    "value": "0"
   },
   {
+    "displayValue": 5,
     "field": "total_value",
+    "match": false,
+    "currency": true,
     "label": "Total",
-    "value": "96.42",
-    "displayValue": 96.42,
     "disabledFormFields": true,
     "error": false,
-    "model": 96.42
+    "value": "5"
   }
 ]
