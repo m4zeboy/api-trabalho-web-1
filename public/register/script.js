@@ -34,20 +34,20 @@ registerForm.addEventListener('submit', async (event) => {
     body[field] = value
   })
 
-  console.log(body)
-  try {
-    const response = await fetch('/users', {
-      method: 'post',
-      body: JSON.stringify(body),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
+  const response = await fetch('/users', {
+    method: 'POST',
+    body: JSON.stringify(body),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+
+  if (response.status >= 400) {
     const data = await response.json()
-  } catch (err) {
-    if (err instanceof Error) {
-      const invalidFeedback = document.querySelector('.invalid-feedback')
-      invalidFeedback.innerHTML = data.message
-    }
+    const invalidFeedback = document.querySelector('.alert.alert-danger')
+    invalidFeedback.innerHTML = data.message
+    invalidFeedback.classList.remove('d-none')
   }
+  registerForm.reset()
+  window.location.href = '/public/'
 })

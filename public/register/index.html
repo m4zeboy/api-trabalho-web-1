@@ -31,28 +31,13 @@
   </div>
   </header>
 
-  <nav class="navbar navbar-expand-lg bg-body-tertiary ">
-    <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-center" id=" navbarNavAltMarkup">
-        <ul class="navbar-nav">
-          <li><a class="nav-link active" aria-current="page" href="#">Home</a></li>
-          <li><a class="nav-link" href="#">Features</a></li>
-          <li><a class="nav-link" href="#">Pricing</a></li>
-          <li><a class="nav-link disabled" aria-disabled="true">Disabled</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+
 
   <div class="container">
     <div class="row">
       <main class="col-md-9">
         <form method="post" id="register-form">
-          <div class="invalid-feedback"></div>
+          <div class="alert alert-danger d-none"></div>
           <fieldset>
             <legend>Dados pessoais</legend>
 
@@ -80,8 +65,8 @@
 
             <div class="mb-3">
               <label for="phoneNumber">Telefone</label>
-              <input type="tel" class="form-control" required name="phoneNumber" id="phoneNumber"
-                pattern="^\(\d{2}\) \d{4}-\d{4}$">
+              <input type="tel" class="form-control" required name="phoneNumber" id="phoneNumber">
+              <!-- pattern="^\(\d{2}\) \d{4}-\d{4}$" -->
             </div>
 
           </fieldset>
@@ -95,14 +80,14 @@
 
             <div class="mb-3">
               <label for="password">Senha</label>
-              <input type="password" class="form-control" required name="password" id="password"
-                pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*\W).{8,}$">
+              <input type="password" class="form-control" required name="password" id="password">
+              <!-- pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*\W).{8,}$" -->
             </div>
 
             <div class="mb-3">
               <label for="confirmPassword">Confimre a Senha</label>
-              <input type="password" class="form-control" required name="confirmPassword" id="confirmPassword"
-                pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*\W).{8,}$">
+              <input type="password" class="form-control" required name="confirmPassword" id="confirmPassword">
+              <!-- pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*\W).{8,}$" -->
             </div>
           </fieldset>
 

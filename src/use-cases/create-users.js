@@ -1,6 +1,7 @@
 import { prisma } from '../lib/database.js'
 import { verifyUserAlreadyExists } from './rules/verify-user-already-exists.js'
 import { verifyUserIsOldEnough } from './rules/verify-user-is-old-enough.js'
+import { InvalidCredentials } from './errors/invalid-credentials.js'
 
 export class CreateUserUseCase {
   async execute({
@@ -17,7 +18,7 @@ export class CreateUserUseCase {
       await verifyUserIsOldEnough(birthDate)
       // verify password matches
       if (password !== confirmPassword) {
-        throw new Error('The passwords do not match')
+        throw new InvalidCredentials()
       }
       const user = await prisma.user.create({
         data: {

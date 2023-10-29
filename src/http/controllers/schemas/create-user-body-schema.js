@@ -18,23 +18,19 @@ export function makeCreateUserBodySchema() {
       }),
     email: z.string().email(),
     state: z.string().max(2),
-    password: z
-      .string()
-      .min(8)
-      .refine(
-        (value) => /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*\W).{8,}$/.test(value),
-        {
-          message: 'Invalid password format',
-        },
-      ),
-    confirmPassword: z
-      .string()
-      .min(8)
-      .refine(
-        (value) => /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*\W).{8,}$/.test(value),
-        {
-          message: 'Invalid password format',
-        },
-      ),
+    password: z.string().min(8),
+    // .refine(
+    //   (value) => /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*\W).{8,}$/.test(value),
+    //   {
+    //     message: 'Invalid password format',
+    //   },
+    // )
+    confirmPassword: z.string().min(8),
+    // .refine(
+    //   (value) => /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*\W).{8,}$/.test(value),
+    //   {
+    //     message: 'Invalid password format',
+    //   },
+    // ),
   })
 }
