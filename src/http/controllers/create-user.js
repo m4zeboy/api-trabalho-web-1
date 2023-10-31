@@ -6,7 +6,6 @@ import { InsuficientAge } from '../../use-cases/errors/insuficient-age.js'
 export async function createUsers(request, reply) {
   const createUserBodySchema = makeCreateUserBodySchema()
   const body = createUserBodySchema.parse(request.body)
-  console.log(body)
   try {
     const useCase = new CreateUserUseCase()
     await useCase.execute(body)

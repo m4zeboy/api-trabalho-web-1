@@ -18,6 +18,65 @@ model User {
   full_name    String
   password     String
   phone_number String
+  Recipe       Recipe[]
 
   @@map("users")
+}
+
+model Category {
+  name               String               @id @unique
+  CategoriesOfRecipe CategoriesOfRecipe[]
+
+  @@map("categories")
+}
+
+model Recipe {
+  id String @id @default(uuid())
+
+  author    User   @relation(fields: [author_id], references: [id])
+  author_id String
+
+  recipe_name String
+  description String
+
+  CategoriesOfRecipe  CategoriesOfRecipe[]
+  ImagesOfRecipe      ImagesOfRecipe[]
+  IngredientsOfRecipe IngredientsOfRecipe[]
+
+  preparation_time         Decimal
+  preparation_instructions String
+  portions                 Int
+  nutritional_value        Int
+  cooking_method           String
+}
+
+model CategoriesOfRecipe {
+  category      Category @relation(fields: [category_name], references: [name])
+  category_name String
+
+  recipe    Recipe @relation(fields: [recipe_id], references: [id])
+  recipe_id String
+
+  @@id([category_name, recipe_id])
+  @@map("categories_of_recipe")
+}
+
+model IngredientsOfRecipe {
+  id              String  @id @default(uuid())
+  ingredient_name String
+  quantity        Decimal
+  unity           String
+  recipe          Recipe  @relation(fields: [recipe_id], references: [id])
+  recipe_id       String
+
+  @@map("ingredients_of_recipe")
+}
+
+model ImagesOfRecipe {
+  url      String
+  recipe   Recipe @relation(fields: [recipeId], references: [id])
+  recipeId String
+
+  @@id([url, recipeId])
+  @@map("images_of_recipe")
 }
