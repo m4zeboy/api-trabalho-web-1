@@ -2,7 +2,7 @@ import path from 'node:path'
 import Fastify from 'fastify'
 import fastifyCookie from '@fastify/cookie'
 import fastifyStatic from '@fastify/static'
-import { ZodError, z } from 'zod'
+import { ZodError } from 'zod'
 import { appRoutes } from './http/routes.js'
 
 const app = Fastify()

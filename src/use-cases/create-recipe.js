@@ -1,31 +1,20 @@
 import { prisma } from '../lib/database.js'
-import { ResourceNotFound } from './errors/resource-not-found.js'
+import { verifyCategoriesExists } from './rules/verify-categories-exists.js'
+import { verifyUserExists } from './rules/verify-user-exists.js'
 
 export class CreateRecipeUseCase {
   async execute(body) {
     try {
       // verify if author exists
-      const author = await prisma.user.findUnique({
-        where: { id: body.authorId },
-      })
-      if (!author) {
-        throw new ResourceNotFound()
-      }
+      await verifyUserExists(body.authorId)
 
       // verify categories
-      for await (const categoryName of body.categories) {
-        const category = await prisma.category.findUnique({
-          where: { name: categoryName },
-        })
-        if (!category) {
-          throw new ResourceNotFound()
-        }
-      }
+      await verifyCategoriesExists(body.categories)
 
       // create recipe
       const recipe = await prisma.recipe.create({
         data: {
-          author_id: author.id,
+          author_id: body.authorId,
           recipe_name: body.recipeName,
           description: body.description,
           portions: body.portions,
