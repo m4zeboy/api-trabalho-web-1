@@ -2,18 +2,26 @@ import { AuthenticateUserUseCase } from '../../use-cases/authenticate.js'
 import { InvalidCredentials } from '../../use-cases/errors/invalid-credentials.js'
 import { ResourceNotFound } from '../../use-cases/errors/resource-not-found.js'
 import { makeAuthenticateBodySchema } from './schemas/authenticate-body-schema.js'
-import { randomUUID } from 'node:crypto'
 
 export async function authenticate(request, reply) {
   const authenticateBodySchema = makeAuthenticateBodySchema()
   const body = authenticateBodySchema.parse(request.body)
   try {
     const useCase = new AuthenticateUserUseCase()
-    await useCase.execute(body)
+    const { user } = await useCase.execute(body)
     const expires = new Date()
-    expires.setTime(expires.getTime() + 1 * 60 * 60 * 1000)
+
+    const token = await reply.jwtSign(
+      {},
+      {
+        sign: {
+          sub: user.id,
+        },
+      },
+    )
+
     return reply
-      .setCookie('sessionId', randomUUID(), {
+      .setCookie('access-token', token, {
         path: '/',
         secure: true,
         sameSite: true,

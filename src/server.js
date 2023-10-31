@@ -4,6 +4,7 @@ import fastifyCookie from '@fastify/cookie'
 import fastifyStatic from '@fastify/static'
 import { ZodError } from 'zod'
 import { appRoutes } from './http/routes.js'
+import fastifyJwt from '@fastify/jwt'
 
 const app = Fastify()
 
@@ -18,6 +19,9 @@ app.setErrorHandler((error, _, reply) => {
   return reply.status(500).send({ message: 'Internal Server Error' })
 })
 
+app.register(fastifyJwt, {
+  secret: '218h9n21end9j8fj-19dj1d0-',
+})
 app.register(fastifyCookie)
 app.register(appRoutes)
 

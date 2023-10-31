@@ -48,6 +48,7 @@ model Recipe {
   portions                 Int
   nutritional_value        Int
   cooking_method           String
+  created                  DateTime @default(now())
 }
 
 model CategoriesOfRecipe {

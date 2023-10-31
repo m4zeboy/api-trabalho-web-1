@@ -13,33 +13,33 @@
   <title>Receitas - Registrar</title>
 </head>
 
-<body>
-  <header class=" container-fluid pt-2 pb-2 bg-dark">
-  <nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/public/"><strong>Receitas</strong></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" href="/public/register/">Registrar</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/public/login/">Entrar</a>
-          </li>
-        </ul>
-        <form class="d-flex">
-          <div class="input-group">
-            <input class="form-control" type="search" aria-label="Search">
-            <button class="btn btn-outline-secondary" type="submit">Pesquisar</button>
-          </div>
-        </form>
+<body class=" bg-dark" data-bs-theme="dark">
+  <header class=" container-fluid pt-2 pb-2 bg-body-secondary">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/public/"><strong>Receitas</strong></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="/public/register/">Registrar</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/public/login/">Entrar</a>
+            </li>
+          </ul>
+          <form class="d-flex">
+            <div class="input-group">
+              <input class="form-control" type="search" aria-label="Search">
+              <button class="btn btn-outline-secondary" type="submit">Pesquisar</button>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
   </header>
 
 
@@ -51,29 +51,29 @@
           <fieldset>
             <legend>Dados pessoais</legend>
 
-            <div class="mb-3">
+            <div class="mb-3 col-md-6">
               <label for="fullName">Nome completo</label>
               <input type="text" class="form-control" pattern="^[a-zA-z ]+$" required name="fullName" id="fullName">
             </div>
 
-            <div class="mb-3">
+            <div class="mb-3 col-md-6">
               <label for="birthDate">Data de nascimento</label>
               <input type="date" class="form-control" required name="birthDate" id="birthDate">
             </div>
 
-            <div class="mb-3">
+            <div class="mb-3 col-md-6">
               <label for="city">Cidade</label>
               <input type="text" class="form-control" required name="city" id="city" pattern="^[a-zA-z ]+$">
             </div>
 
-            <div class="mb-3">
+            <div class="mb-3 col-md-6">
               <label for="state">Estado</label>
               <select type="date" class="form-control" required name="state" id="state">
 
               </select>
             </div>
 
-            <div class="mb-3">
+            <div class="mb-3 col-md-6">
               <label for="phoneNumber">Telefone</label>
               <input type="tel" class="form-control" required name="phoneNumber" id="phoneNumber">
               <!-- pattern="^\(\d{2}\) \d{4}-\d{4}$" -->
@@ -83,18 +83,18 @@
 
           <fieldset>
             <legend>Credenciais</legend>
-            <div class="mb-3">
+            <div class="mb-3 col-md-6">
               <label for="email">E-mail</label>
               <input type="email" class="form-control" required name="email" id="email">
             </div>
 
-            <div class="mb-3">
+            <div class="mb-3 col-md-6">
               <label for="password">Senha</label>
               <input type="password" class="form-control" required name="password" id="password">
               <!-- pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*\W).{8,}$" -->
             </div>
 
-            <div class="mb-3">
+            <div class="mb-3 col-md-6">
               <label for="confirmPassword">Confimre a Senha</label>
               <input type="password" class="form-control" required name="confirmPassword" id="confirmPassword">
               <!-- pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*\W).{8,}$" -->
