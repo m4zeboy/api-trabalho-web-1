@@ -1,7 +1,16 @@
-export async function verifySession(request, reply) {
-  const { sessionId } = request.cookies
+import { app } from '../../server.js'
 
-  if (!sessionId) {
-    return reply.status(401).send({ error: 'Unauthorized.' })
+export async function verifySession(request, reply) {
+  try {
+    const { 'access-token': token } = request.cookies
+    const verifiedToken = app.jwt.verify(token)
+    request.sub = verifiedToken.sub
+  } catch (error) {
+    return (
+      reply
+        .status(401)
+        // .redirect('/public/login')
+        .send({ message: 'Não autorizado' })
+    )
   }
 }
