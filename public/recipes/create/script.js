@@ -25,13 +25,54 @@ window.onload = async function () {
 }
 const createRecipeForm = document.querySelector('form#create-recipe')
 
-createRecipeForm.addEventListener('submit', (event) => {
+createRecipeForm.addEventListener('submit', async (event) => {
   event.preventDefault()
   const body = getFormData()
+  try {
+    const response = await fetch('/recipes', {
+      body: JSON.stringify(body),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    if (!response.ok) {
+      const data = await response.json()
+      throw new Error(data.message)
+    }
+    const data = await response.json()
+
+    const fileInput = document.querySelector("input[type='file']#file")
+    const formData = new FormData()
+    for (const file of fileInput.files) {
+      formData.append('files', file)
+    }
+
+    try {
+      const response = await fetch(`/recipes/${data.id}/images`, {
+        body: formData,
+        method: 'POST',
+      })
+      if (!response.ok) {
+        const data = await response.json()
+        throw new Error(data.message)
+      }
+    } catch (e) {
+      console.log(e)
+    }
+
+    console.log(data)
+  } catch (err) {
+    const invalidFeedback = document.querySelector('.alert.alert-danger')
+    invalidFeedback.innerHTML = err.message
+    invalidFeedback.classList.remove('d-none')
+  }
 })
 
 function getFormData() {
   const fieldsets = Array.from(createRecipeForm.querySelectorAll('fieldset'))
+
+  fieldsets.pop()
 
   const transformedFieldsets = fieldsets.map((fieldset) => {
     if (fieldset.id === 'recipe-ingredients') {
@@ -42,6 +83,7 @@ function getFormData() {
         ),
       }
     }
+
     return {
       id: fieldset.id,
       fields: Array.from(fieldset.querySelectorAll('input, select, textarea')),
@@ -52,26 +94,41 @@ function getFormData() {
 
   transformedFieldsets.forEach((fieldset) => {
     if (fieldset.id === 'recipe-ingredients') {
-      body.ingredients = fieldset.ingredients.map((ingredientWrapper) => {
-        console.log(ingredientWrapper)
-
-        const ingredient = {}
-        ingredient.ingredientName = ingredientWrapper.querySelector(
-          'input#ingredientName',
-        ).value
-        ingredient.quantity =
-          ingredientWrapper.querySelector('input#quantity').value
-        ingredient.unity = ingredientWrapper.querySelector('input#unity').value
-        return ingredient
-      })
+      body.ingredients = getIngredients(fieldset)
+    } else if (fieldset.id === 'recipe-categories') {
+      const selectedOptions = getSelectedOptions(fieldset)
+      body.categories = selectedOptions
     } else {
       fieldset.fields.forEach((field) => {
         body[field.id] = field.value
       })
     }
-
     delete body.authorName
   })
 
   return body
+}
+
+function getIngredients(fieldset) {
+  return fieldset.ingredients.map((ingredientWrapper) => {
+    const ingredient = {}
+    ingredient.ingredientName = ingredientWrapper.querySelector(
+      'input#ingredientName',
+    ).value
+    ingredient.quantity =
+      ingredientWrapper.querySelector('input#quantity').value
+    ingredient.unity = ingredientWrapper.querySelector('input#unity').value
+    return ingredient
+  })
+}
+
+function getSelectedOptions(fieldset) {
+  const selectedOptions = []
+  const options = Array.from(fieldset.fields[0].options)
+  for (const option of options) {
+    if (option.selected) {
+      selectedOptions.push(option.value)
+    }
+  }
+  return selectedOptions
 }

@@ -9,14 +9,14 @@ export function makeCreateRecipeBodySchema() {
     ingredients: z.array(
       z.object({
         ingredientName: z.string(),
-        quantity: z.number(),
+        quantity: z.coerce.number(),
         unity: z.string(),
       }),
     ),
-    preparationTime: z.number(),
+    preparationTime: z.coerce.number(),
     preparationInstructions: z.string().max(800),
-    portions: z.number(),
-    nutritionalValue: z.number(),
+    portions: z.coerce.number(),
+    nutritionalValue: z.coerce.number(),
     cookingMethod: z.string(),
   })
 }
