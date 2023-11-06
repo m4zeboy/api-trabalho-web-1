@@ -2,14 +2,10 @@ import path from 'node:path'
 import Fastify from 'fastify'
 import fastifyCookie from '@fastify/cookie'
 import fastifyStatic from '@fastify/static'
-import { ZodError, z } from 'zod'
+import { ZodError } from 'zod'
 import { privateRoutes, publicRoutes } from './http/routes.js'
 import fastifyJwt from '@fastify/jwt'
-import multipart from '@fastify/multipart'
-import util from 'node:util'
-import { pipeline } from 'node:stream'
-import fs from 'node:fs'
-import { prisma } from './lib/database.js'
+import fastifyMultipart from '@fastify/multipart'
 
 export const app = Fastify()
 
@@ -31,7 +27,7 @@ app.register(fastifyJwt, {
 
 app.register(fastifyCookie)
 
-app.register(multipart, {
+app.register(fastifyMultipart, {
   limits: {
     fileSize: 8 * 1024 * 1024 * 50, // 5mb
   },
@@ -47,34 +43,6 @@ app.register(fastifyStatic, {
 
 app.register(publicRoutes)
 app.register(privateRoutes)
-
-const pump = util.promisify(pipeline)
-
-app.post('/recipes/:recipeId/images', async (req, res) => {
-  const attachRecipeImageParamsSchema = z.object({
-    recipeId: z.string().uuid(),
-  })
-
-  const { recipeId } = attachRecipeImageParamsSchema.parse(req.params)
-
-  console.log(recipeId)
-
-  const parts = req.files()
-  for await (const part of parts) {
-    const filename = path
-      .join(import.meta.url, '..', 'uploads', part.filename)
-      .replace('file:', '')
-
-    await pump(part.file, fs.createWriteStream(filename))
-    const imageOfRecipe = await prisma.imagesOfRecipe.create({
-      data: {
-        url: part.filename,
-        recipeId,
-      },
-    })
-  }
-  res.send()
-})
 
 try {
   await app.listen({ port: 3333 })

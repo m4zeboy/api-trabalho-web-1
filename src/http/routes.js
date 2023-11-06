@@ -1,7 +1,9 @@
 import { prisma } from '../lib/database.js'
+import { attachRecipeImages } from './controllers/attach-recipe-images.js'
 import { authenticate } from './controllers/authenticate.js'
 import { createRecipe } from './controllers/create-recipe.js'
 import { createUsers } from './controllers/create-user.js'
+import { profile } from './controllers/profile.js'
 import { verifySession } from './middlewares/verify-session.js'
 export async function publicRoutes(app) {
   app.post('/users', createUsers)
@@ -46,12 +48,7 @@ export async function privateRoutes(app) {
     return reply.status(200).send(categories)
   })
 
-  app.get('/me', async function (req, reply) {
-    const userId = req.sub
-    const user = await prisma.user.findUnique({ where: { id: userId } })
-    if (!user) {
-      return reply.status(404).send({ message: 'Usuário não encontrado' })
-    }
-    return reply.status(200).send(user)
-  })
+  app.get('/me', profile)
+
+  app.post('/recipes/:recipeId/images', attachRecipeImages)
 }
