@@ -5,6 +5,8 @@ import { createRecipe } from './controllers/create-recipe.js'
 import { createUsers } from './controllers/create-user.js'
 import { profile } from './controllers/profile.js'
 import { verifySession } from './middlewares/verify-session.js'
+import { getRecipe } from './controllers/get-recipe.js'
+
 export async function publicRoutes(app) {
   app.post('/users', createUsers)
 
@@ -16,6 +18,10 @@ export async function privateRoutes(app) {
 
   app.get('/public/recipes/create', async (req, reply) => {
     return reply.sendFile('/recipes/create/index.html')
+  })
+
+  app.get('/public/recipes/:id', async (req, reply) => {
+    return reply.sendFile('/recipes/index.html')
   })
 
   app.post('/recipes', createRecipe)
@@ -51,4 +57,6 @@ export async function privateRoutes(app) {
   app.get('/me', profile)
 
   app.post('/recipes/:recipeId/images', attachRecipeImages)
+
+  app.get('/recipes/:recipeId', getRecipe)
 }
