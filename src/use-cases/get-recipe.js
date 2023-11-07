@@ -7,6 +7,15 @@ export class GetRecipeUseCase {
       const recipe = await prisma.recipe.findUnique({
         where: { id },
         select: {
+          recipe_name: true,
+          cooking_method: true,
+          created: true,
+          description: true,
+          nutritional_value: true,
+          portions: true,
+          id: true,
+          preparation_instructions: true,
+          preparation_time: true,
           author: {
             select: {
               full_name: true,
