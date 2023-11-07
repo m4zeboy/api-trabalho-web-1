@@ -12,18 +12,30 @@ addIngredientButton.addEventListener('click', (event) => {
   ingredientsContainer.appendChild(ingredientWrapperClone)
 })
 
+const createRecipeForm = document.querySelector('form#create-recipe')
+
 window.onload = async function () {
   const response = await fetch('/me')
   const profile = await response.json()
 
-  console.log(profile)
   const inputAuthorName = document.querySelector('input#authorName')
   const inputAuthorId = document.querySelector('input#authorId')
 
   inputAuthorName.value = profile.full_name
   inputAuthorId.value = profile.id
+
+  // load categories options
+  const categoriesSelect = createRecipeForm.querySelector('select#categories')
+  const categoriesResponse = await fetch('/categories')
+  const categories = await categoriesResponse.json()
+  // console.log(categories)
+  for (const category of categories) {
+    const categoryOption = document.createElement('option')
+    categoryOption.innerText = category.name
+    categoryOption.value = category.name
+    categoriesSelect.appendChild(categoryOption)
+  }
 }
-const createRecipeForm = document.querySelector('form#create-recipe')
 
 createRecipeForm.addEventListener('submit', async (event) => {
   event.preventDefault()
@@ -57,6 +69,8 @@ createRecipeForm.addEventListener('submit', async (event) => {
         const data = await response.json()
         throw new Error(data.message)
       }
+
+      createRecipeForm.reset()
     } catch (e) {
       console.log(e)
     }

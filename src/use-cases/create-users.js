@@ -22,7 +22,7 @@ export class CreateUserUseCase {
       }
       const user = await prisma.user.create({
         data: {
-          full_name: fullName,
+          full_name: fullName.toUpperCase(),
           birth_date: new Date(birthDate),
           city,
           email,
