@@ -48,7 +48,8 @@ model Recipe {
   portions                 Int
   nutritional_value        Int
   cooking_method           String
-  created                  DateTime @default(now())
+  created                  DateTime          @default(now())
+  RatingsOfRecipe          RatingsOfRecipe[]
 }
 
 model CategoriesOfRecipe {
@@ -80,4 +81,14 @@ model ImagesOfRecipe {
 
   @@id([url, recipeId])
   @@map("images_of_recipe")
+}
+
+model RatingsOfRecipe {
+  rating    Int    @default(0)
+  recipe_id String
+
+  recipe Recipe @relation(fields: [recipe_id], references: [id])
+
+  @@id([recipe_id, rating])
+  @@map("ratings_of_recipe")
 }

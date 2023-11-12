@@ -1,6 +1,6 @@
-import { ResourceNotFound } from '../../use-cases/errors/resource-not-found.js'
-import { GetRecipeUseCase } from '../../use-cases/get-recipe.js'
-import { makeGetRecipeParamsSchema } from './schemas/get-recipe-params-schema.js'
+import { ResourceNotFound } from '../../../use-cases/errors/resource-not-found.js'
+import { GetRecipeUseCase } from '../../../use-cases/get-recipe.js'
+import { makeGetRecipeParamsSchema } from '../schemas/get-recipe-params-schema.js'
 
 export async function getRecipe(request, reply) {
   const getRecipeParamsSchema = makeGetRecipeParamsSchema()

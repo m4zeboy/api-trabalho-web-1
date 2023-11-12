@@ -1,4 +1,4 @@
-import { GetRecipeUseCase } from '../../use-cases/get-recipe.js'
+import { GetRecipeUseCase } from '../../../use-cases/get-recipe.js'
 
 export async function renderRecipeDetailsPage(req, reply) {
   const { id } = req.params
@@ -30,10 +30,24 @@ export async function renderRecipeDetailsPage(req, reply) {
     })
   }
 
+  const rating = `
+<div id="rating" data-recipe-id="${recipe.id}">
+  <span class="star" data-value="1">&#9733;</span>
+  <span class="star" data-value="2">&#9733;</span>
+  <span class="star" data-value="3">&#9733;</span>
+  <span class="star" data-value="4">&#9733;</span>
+  <span class="star" data-value="5">&#9733;</span>
+</div>
+
+  `
+
   const article = `        
 <article>
   <h1>${recipe.recipe_name}</h1>
-
+  <section>
+    ${rating}
+    <span>Média de avaliação: <strong>${recipe.avgRating}</strong></span>
+  </section>
   <p class="text-muted">
     <span>${recipe.preparation_time} minuto(s)</span>
     <span> | </span>
@@ -59,7 +73,19 @@ export async function renderRecipeDetailsPage(req, reply) {
   </section>
 </article>
 `
+  const style = `
+<style>
+  .star {
+    color: gray;
+    cursor: pointer;
+    font-size: 30px;
+  }
 
+  .star.rated {
+    color: gold;
+  }
+</style> 
+  `
   const head = `
 <head>
   <meta charset="UTF-8">
@@ -71,6 +97,7 @@ export async function renderRecipeDetailsPage(req, reply) {
   crossorigin="anonymous"></script>
   <link rel="stylesheet" href="/public/styles/global.css">
   <title>Receitas - Home</title>
+  ${style}
 </head>
   `
 
@@ -107,6 +134,44 @@ export async function renderRecipeDetailsPage(req, reply) {
 </header>
   `
 
+  const script = `
+  document.querySelectorAll('#rating .star').forEach(star => {
+    star.onclick = function() {
+        let rating = this.dataset.value;
+        let recipeId = document.getElementById('rating').dataset.recipeId;
+        updateRating(recipeId, rating);
+    }
+});
+
+function updateRating(recipeId, rating) {
+    fetch('/recipes/' + recipeId + '/rate', {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ rating: rating }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+        setRating(rating); // Atualiza o UI com a nova classificação
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+
+function setRating(rating) {
+    document.querySelectorAll('#rating .star').forEach(star => {
+        star.classList.remove('rated');
+        if (star.dataset.value <= rating) {
+            star.classList.add('rated');
+        }
+    });
+}
+  
+  `
+
   const html = `
   
   <!DOCTYPE html>
@@ -130,7 +195,7 @@ export async function renderRecipeDetailsPage(req, reply) {
     <footer class="container-fluid bg-body-tertiary mt-4 p-4">
       <small>Moisés Silva de Azevedo e Henrique Cerizza &copy;</small>
     </footer>
-
+  <script>${script}</script>
   </body>
   
   </html>

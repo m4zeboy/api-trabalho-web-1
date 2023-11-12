@@ -1,6 +1,6 @@
-import { CreateRecipeUseCase } from '../../use-cases/create-recipe.js'
-import { ResourceNotFound } from '../../use-cases/errors/resource-not-found.js'
-import { makeCreateRecipeBodySchema } from './schemas/create-recipe-body-schema.js'
+import { CreateRecipeUseCase } from '../../../use-cases/create-recipe.js'
+import { ResourceNotFound } from '../../../use-cases/errors/resource-not-found.js'
+import { makeCreateRecipeBodySchema } from '../schemas/create-recipe-body-schema.js'
 
 export async function createRecipe(req, reply) {
   console.log(req.body)

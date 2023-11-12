@@ -20,7 +20,9 @@ window.onload = async function () {
       card.classList.add('card', 'mb-3')
       const img = document.createElement('img')
       img.classList.add('card-img-top')
-      img.src = ''
+
+      img.src = '/public/uploads/' + recipe.recipe.ImagesOfRecipe[0].url
+
       card.appendChild(img)
 
       const cardBody = document.createElement('div')
@@ -31,6 +33,11 @@ window.onload = async function () {
       title.classList.add('card-title')
       title.innerText = recipe.recipe.recipe_name
       cardBody.appendChild(title)
+
+      const authorName = document.createElement('p')
+      authorName.classList.add('text-muted')
+      authorName.innerHTML = recipe.recipe.author.full_name
+      cardBody.appendChild(authorName)
 
       const link = document.createElement('a')
       link.classList.add('btn', 'btn-primary')

@@ -42,9 +42,18 @@ export class GetRecipeUseCase {
           },
         },
       })
+
       if (!recipe) {
         throw new ResourceNotFound()
       }
+      const { _avg } = await prisma.ratingsOfRecipe.aggregate({
+        _avg: {
+          rating: true,
+        },
+        where: { recipe_id: id },
+      })
+
+      recipe.avgRating = _avg.rating
 
       return { recipe }
     } catch (err) {
