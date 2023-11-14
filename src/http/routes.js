@@ -12,7 +12,7 @@ export async function publicRoutes(app) {
 }
 
 export async function privateRoutes(app) {
-  // app.addHook('onRequest', verifySession)
+  app.addHook('onRequest', verifySession)
 
   app.register(categoriesRoutes)
   app.register(recipesRoutes)

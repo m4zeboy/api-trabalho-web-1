@@ -5,7 +5,7 @@ import { rate } from './rate.js'
 import { renderRecipeDetailsPage } from './render-recipe-details-page.js'
 
 export async function recipesRoutes(app) {
-  app.get('/public/recipes/create', async (req, reply) => {
+  app.get('/public/recipes/create', async (_, reply) => {
     return reply.sendFile('/recipes/create/index.html')
   })
   app.get('/public/recipes/:id', renderRecipeDetailsPage)

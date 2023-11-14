@@ -1,0 +1,9 @@
+.star {
+  color: gray;
+  cursor: pointer;
+  font-size: 30px;
+}
+
+.star.rated {
+  color: gold;
+}
