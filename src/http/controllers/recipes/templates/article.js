@@ -1,8 +1,9 @@
 import { categoryList } from './category-list.js'
 import { commentForm } from './comment-form.js'
+import { commentList } from './comment-list.js'
 import { ingredientsList } from './ingredients-list.js'
 import { rating } from './rating.js'
-export const article = (recipe) => {
+export const article = (recipe, comments) => {
   const imageUrl = recipe.ImagesOfRecipe[0].url || ''
 
   return `        
@@ -36,7 +37,9 @@ export const article = (recipe) => {
     </section>
     <hr>
     <section>
+
       <h3>Comentários</h3>
+      ${commentList(comments)}
       ${commentForm(recipe)}
     </section>
   </article>
