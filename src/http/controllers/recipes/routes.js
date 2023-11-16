@@ -1,3 +1,4 @@
+import { addComment } from './add-comment.js'
 import { attachRecipeImages } from './attach-recipe-images.js'
 import { createRecipe } from './create-recipe.js'
 import { getRecipe } from './get-recipe.js'
@@ -17,4 +18,6 @@ export async function recipesRoutes(app) {
   app.get('/recipes/:recipeId', getRecipe)
 
   app.patch('/recipes/:recipeId/rate', rate)
+
+  app.post('/recipes/:recipeId/comments', addComment)
 }

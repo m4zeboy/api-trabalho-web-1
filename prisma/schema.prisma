@@ -11,14 +11,15 @@ datasource db {
 }
 
 model User {
-  id           String   @id @default(uuid())
-  birth_date   DateTime
-  city         String
-  email        String   @unique
-  full_name    String
-  password     String
-  phone_number String
-  Recipe       Recipe[]
+  id               String             @id @default(uuid())
+  birth_date       DateTime
+  city             String
+  email            String             @unique
+  full_name        String
+  password         String
+  phone_number     String
+  Recipe           Recipe[]
+  CommentsOfRecipe CommentsOfRecipe[]
 
   @@map("users")
 }
@@ -48,8 +49,9 @@ model Recipe {
   portions                 Int
   nutritional_value        Int
   cooking_method           String
-  created                  DateTime          @default(now())
+  created                  DateTime           @default(now())
   RatingsOfRecipe          RatingsOfRecipe[]
+  CommentsOfRecipe         CommentsOfRecipe[]
 }
 
 model CategoriesOfRecipe {
@@ -91,4 +93,17 @@ model RatingsOfRecipe {
 
   @@id([recipe_id, rating])
   @@map("ratings_of_recipe")
+}
+
+model CommentsOfRecipe {
+  recipe    Recipe @relation(fields: [recipe_id], references: [id])
+  recipe_id String
+  user      User   @relation(fields: [user_id], references: [id])
+  user_id   String
+
+  created DateTime @default(now())
+
+  comment String
+
+  @@id([recipe_id, user_id, comment])
 }

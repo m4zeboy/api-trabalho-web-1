@@ -1,4 +1,5 @@
 import { categoryList } from './category-list.js'
+import { commentForm } from './comment-form.js'
 import { ingredientsList } from './ingredients-list.js'
 import { rating } from './rating.js'
 export const article = (recipe) => {
@@ -32,6 +33,11 @@ export const article = (recipe) => {
     <section>
       <h2>Ingredientes</h2>
       ${ingredientsList(recipe.IngredientsOfRecipe).join(' ')}
+    </section>
+    <hr>
+    <section>
+      <h3>Comentários</h3>
+      ${commentForm(recipe)}
     </section>
   </article>
   `

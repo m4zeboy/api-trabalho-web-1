@@ -1,7 +1,6 @@
 import { head } from './head.js'
 import { header } from './header.js'
 import { article } from './article.js'
-import { script } from './js/script.js'
 export const html = (recipe) => {
   return `
   <!DOCTYPE html>
@@ -25,7 +24,8 @@ export const html = (recipe) => {
     <footer class="container-fluid bg-body-tertiary mt-4 p-4">
       <small>Moisés Silva de Azevedo e Henrique Cerizza &copy;</small>
     </footer>
-  <script>${script}</script>
+  <script src="/public/scripts/rating.js"></script>
+  <script src="/public/scripts/add-comment.js"></script>
   </body>
   
   </html>
